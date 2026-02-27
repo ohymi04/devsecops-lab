@@ -67,4 +67,13 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+// ⚠️ Vulnérabilité SQL intentionnelle
+app.get('/api/users', (req, res) => {
+  const { username } = req.query;
+  // Injection SQL ! Ne pas faire en prod
+  const query = `SELECT * FROM users WHERE username = '${username}'`;
+  console.log('Query:', query);
+  res.json({ query });
+});
+
 app.listen(3000, () => console.log('✅ Secure server running'));
