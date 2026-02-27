@@ -146,6 +146,8 @@ jobs:
         with:
           target: 'http://localhost:3000'
           allow_issue_writing: false
+          docker_run_options: "-u $(id -u):$(id -g) -v $(pwd):/zap/wrk/:rw"
+
   # ═══════════════════════════════════════
   # 7. RAPPORT FINAL
   # Génère un résumé de tous les scans de sécurité
