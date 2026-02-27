@@ -144,14 +144,11 @@ jobs:
           docker run -d -p 3000:3000 --name app vuln-app:${{ github.sha }}
           sleep 10
 
-      - name: OWASP ZAP Baseline Scan
-        run: mkdir -p ./zap-output && chmod 777 ./zap-output
       - uses: zaproxy/action-baseline@v0.10.0
         with:
           target: 'http://localhost:3000'
           allow_issue_writing: false
-          format: 'json,md,html'
-          output_dir: './zap-output'
+          artifact_name: 'zap_scan'
   # ═══════════════════════════════════════
   # 7. RAPPORT FINAL
   # Génère un résumé de tous les scans de sécurité
