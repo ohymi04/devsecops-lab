@@ -124,7 +124,7 @@ jobs:
   # ═══════════════════════════════════════
   # 6. DAST
   # ═══════════════════════════════════════
-   dast:
+  dast:
     name: ⚡ DAST
     runs-on: ubuntu-latest
     needs: build
