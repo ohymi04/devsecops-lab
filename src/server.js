@@ -67,15 +67,12 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// Simulation DB vulnérable
-const fakeDb = {
-  query: (q) => console.log("Executing:", q)
-};
+const mysql = require('mysql2');
 
 app.get('/api/users', (req, res) => {
   const { username } = req.query;
 
-  fakeDb.query(
+  mysql.query(
     "SELECT * FROM users WHERE username = '" + username + "'"
   );
 
