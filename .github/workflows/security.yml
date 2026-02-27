@@ -209,7 +209,7 @@ jobs:
               "container_scan": {
                 "status": "${{ needs.container-scan.result }}",
                 "tool": "Trivy"
-              }
+              },
               "codeql": {
                 "status": "${{ needs.codeql.result }}",
                 "tool": "CodeQL"
@@ -221,9 +221,9 @@ jobs:
             },
             "summary": {
               "total_checks": 4,
-              "passed": $(echo '${{ needs.sast.result }} ${{ needs.sca.result }} ${{ needs.secrets.result }} ${{ needs.container-scan.result }}' | grep -o "success" | wc -l),
-              "failed": $(echo '${{ needs.sast.result }} ${{ needs.sca.result }} ${{ needs.secrets.result }} ${{ needs.container-scan.result }}' | grep -o "failure" | wc -l),
-              "overall_status": "$([[ "${{ needs.sast.result }}" == "failure" ]] || [[ "${{ needs.sca.result }}" == "failure" ]] || [[ "${{ needs.secrets.result }}" == "failure" ]] || [[ "${{ needs.container-scan.result }}" == "failure" ]] && echo "FAILED" || echo "PASSED")"
+              "passed": $(echo '${{ needs.sast.result }} ${{ needs.sca.result }} ${{ needs.secrets.result }} ${{ needs.container-scan.result }} ${{ needs.codeql.result }} ${{ needs.security-gate.result }}' | grep -o "success" | wc -l),
+              "failed": $(echo '${{ needs.sast.result }} ${{ needs.sca.result }} ${{ needs.secrets.result }} ${{ needs.container-scan.result }} ${{ needs.codeql.result }} ${{ needs.security-gate.result }}' | grep -o "failure" | wc -l),
+              "overall_status": "$([[ "${{ needs.sast.result }}" == "failure" ]] || [[ "${{ needs.sca.result }}" == "failure" ]] || [[ "${{ needs.secrets.result }}" == "failure" ]] || [[ "${{ needs.container-scan.result }}" == "failure" ]]  || [[ "${{ needs.codeql.result }}" == "failure" ]] || [[ "${{ needs.security-gate.result }}" == "failure" ]] && echo "FAILED" || echo "PASSED")"
             }
           }
           EOF
