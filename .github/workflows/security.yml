@@ -144,11 +144,18 @@ jobs:
           docker run -d -p 3000:3000 --name app vuln-app:${{ github.sha }}
           sleep 10
 
+      - name: Prepare ZAP output directory
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/zap-output
+          chmod 777 $GITHUB_WORKSPACE/zap-output
+
       - uses: zaproxy/action-baseline@v0.10.0
         with:
           target: 'http://localhost:3000'
           allow_issue_writing: false
           artifact_name: 'zap_scan'
+        env:
+          ZAP_HOME: $GITHUB_WORKSPACE/zap-output
   # ═══════════════════════════════════════
   # 7. RAPPORT FINAL
   # Génère un résumé de tous les scans de sécurité
