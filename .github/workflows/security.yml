@@ -2,6 +2,14 @@ name: DevSecOps Pipeline
 
 on: [push, pull_request]
 
+
+permissions:
+  contents: read        # Permet de cloner le dépôt
+  security-events: write # Permet d'écrire des événements de sécurité (pour CodeQL, Semgrep, etc.)
+  actions: read         # Permet de lire les artifacts et logs
+  pull-requests: write   # Permet de commenter les PR (si vous utilisez des annotations)
+
+
 jobs:
   # ═══════════════════════════════════════
   # 1. BUILD
